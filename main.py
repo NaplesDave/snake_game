@@ -3,6 +3,7 @@ import time
 
 from food import Food
 from snake import Snake
+from scoreboard import Scoreboard
 
 screen = Screen()
 screen.setup(width=600, height=600)
@@ -11,6 +12,7 @@ screen.title("My Snake Game")
 screen.tracer(0)
 snake = Snake()  # Create a new Snake object
 food = Food()
+scoreBoard = Scoreboard()
 
 screen.listen()  # Listen for keystrokes
 screen.onkey(snake.up, "Up")  # Up arrow pressed
@@ -25,9 +27,12 @@ while game_is_on:
     snake.move()
 
     # Detect collision with food
-    if snake.head.distance(food) < 15:
+    if snake.head.distance(food) < 15:  # Less than 15 pixels from head to food...do this
         print("nom nom nom")
         food.refresh()
+        scoreBoard.score += 1
+        scoreBoard.scoreboard_update()
+
 
 
 screen.exitonclick()
